@@ -6,7 +6,7 @@ doc.xpath('fpc4:Root').xpath('fpc4:Arrays').xpath('fpc4:Array').xpath('fpc4:Rule
 		my_file = File.open(doo.xpath('fpc4:Name').text+".rsc", 'w')
 		doo.xpath('fpc4:DomainNameStrings')[0].xpath('fpc4:Str').each do |dio|
 			my_file.puts 'do { /ip firewall address-list add address="'+dio.text.gsub("*.","")+'" list="'+doo.xpath('fpc4:Name').text+'"} on-error={}' rescue puts "Error in: "+dio.text
-			#my_file.write "\r\n"
+			my_file.write "\r\n"
 		end
 		my_file.close
 		puts "------"
@@ -18,7 +18,7 @@ doc.xpath('fpc4:Root').xpath('fpc4:Arrays').xpath('fpc4:Array').xpath('fpc4:Rule
 		puts doo.xpath('fpc4:Name').text
 		doo.xpath('fpc4:URLStrings')[0].xpath('fpc4:Str').each do |dio|
 			my_file.puts 'do { /ip firewall address-list add address="'+URI.parse(dio.text.gsub("*.","").gsub("\\","")).host.to_s+'" list="'+doo.xpath('fpc4:Name').text+'"} on-error={}' rescue puts "Error in: "+dio.text
-			#my_file.write "\r\n"
+			my_file.write "\r\n"
 		end
 		my_file.close
 		puts "------"
